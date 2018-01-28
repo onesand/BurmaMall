@@ -1,6 +1,6 @@
 package com.burmamall.burmamall.factory;
 
-import com.burmamall.burmamall.viewmodel.banner.IBannerModel;
+import com.burmamall.burmamall.viewmodel.banner.HomeModel;
 import com.burmamall.burmamall.viewmodel.splash.SplashModel;
 
 /**
@@ -10,7 +10,7 @@ import com.burmamall.burmamall.viewmodel.splash.SplashModel;
 
 public interface IViewModelFactory {
 
-    IBannerModel getBannerModel();
+    HomeModel getBannerModel();
 
     SplashModel getSplashModel();
 }

@@ -3,7 +3,6 @@ package com.burmamall.burmamall.config;
 import android.content.Context;
 import android.content.Intent;
 
-import com.burmamall.burmamall.MainActivity;
 import com.burmamall.burmamall.view.fragment.MainFragment;
 
 /**

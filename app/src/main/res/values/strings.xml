@@ -5,4 +5,5 @@
     <string name="main_message">Message</string>
     <string name="main_cart">Cart</string>
     <string name="main_my">My</string>
+    <string name="scan">扫一扫</string>
 </resources>

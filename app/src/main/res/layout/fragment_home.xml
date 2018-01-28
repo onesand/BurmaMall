@@ -1,7 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 搜索栏 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/title">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/home_fragment_scan"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:background="@mipmap/scan"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scan"
+                android:textColor="@color/white"
+                android:textSize="10dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- 搜索栏end -->
+
+    <!-- banner -->
+    <com.youth.banner.Banner
+        android:id="@+id/home_fragment_banner"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+    </com.youth.banner.Banner>
+    <!-- banner end-->
 
     <TextView
         android:gravity="center"

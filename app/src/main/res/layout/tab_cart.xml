@@ -13,14 +13,15 @@
 
         <ImageView
             android:id="@+id/tab_cart_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/tab_icon_w"
+            android:layout_height="@dimen/tab_icon_h"
             android:background="@drawable/main_cart_selector" />
 
         <TextView
             android:id="@+id/tab_cart_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/tab_hint_size"
             android:text="@string/main_cart" />
     </LinearLayout>
 

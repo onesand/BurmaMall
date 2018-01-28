@@ -1,8 +1,8 @@
 package com.burmamall.burmamall.factory;
 
 import com.burmamall.burmamall.R;
-import com.burmamall.burmamall.viewmodel.banner.IBannerModel;
-import com.burmamall.burmamall.viewmodel.banner.BannerModel;
+import com.burmamall.burmamall.viewmodel.banner.IHomeModel;
+import com.burmamall.burmamall.viewmodel.banner.HomeModel;
 import com.burmamall.burmamall.viewmodel.splash.DrawableSplashModel;
 import com.burmamall.burmamall.viewmodel.splash.SplashModel;
 
@@ -13,8 +13,8 @@ import com.burmamall.burmamall.viewmodel.splash.SplashModel;
 public class RootViewModelFactory implements IViewModelFactory{
 
     @Override
-    public IBannerModel getBannerModel() {
-        return new BannerModel();
+    public HomeModel getBannerModel() {
+        return new HomeModel();
     }
 
     @Override
