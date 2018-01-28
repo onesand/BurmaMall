@@ -1,5 +1,7 @@
 package com.burmamall.burmamall.viewmodel.banner;
 
+import android.app.Activity;
+
 import com.burmamall.burmamall.ui.BannerListener;
 import com.burmamall.burmamall.viewmodel.IViewModel;
 import com.youth.banner.Banner;
@@ -16,4 +18,5 @@ public interface IHomeModel extends IViewModel{
 
     void initBanner(Banner banner,List<?> images);
 
+    void requestFileManifest(Activity activity);
 }

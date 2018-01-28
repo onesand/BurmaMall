@@ -1,12 +1,18 @@
 package com.burmamall.burmamall.viewmodel.banner;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.burmamall.burmamall.R;
 import com.burmamall.burmamall.ui.BannerListener;
+import com.burmamall.burmamall.utils.permission.OnPermissionResultListener;
+import com.burmamall.burmamall.utils.permission.PermissionsUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -33,14 +39,12 @@ public class HomeModel implements IHomeModel{
     public void requestBannerData(Banner banner,BannerListener bannerListener) {
         this.bannerListener = bannerListener;
         //// TODO: 2018/1/28  查询服务器有没有更新
-        List<Integer> images = new ArrayList<Integer>();
-//        images.add("file://"+"/sdcard/Pictures/Screenshots/11.jpg");
-//        images.add("file://"+"/sdcard/Pictures/Screenshots/12.jpg");
-//        images.add("file://"+"/sdcard/Pictures/Screenshots/13.jpg");
-//        images.add("file://"+"/sdcard/Pictures/Screenshots/14.jpg");
+        List<String> images = new ArrayList<>();
+        images.add("/sdcard/Pictures/Screenshots/11.jpg");
+        images.add("/sdcard/Pictures/Screenshots/12.jpg");
+        images.add("/sdcard/Pictures/Screenshots/13.jpg");
+        images.add("/sdcard/Pictures/Screenshots/14.jpg");
 
-        images.add(R.mipmap.ic_launcher);
-        images.add(R.mipmap.ic_launcher);
         initBanner(banner,images);
     }
 
@@ -94,6 +98,26 @@ public class HomeModel implements IHomeModel{
              */
 
             Glide.with(context).load(path).into(imageView);
+        }
+    }
+
+    @Override
+    public void requestFileManifest(Activity activity){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            int code = PermissionsUtil.checkPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (code != PackageManager.PERMISSION_GRANTED){
+                PermissionsUtil.requestPermissions(activity, new OnPermissionResultListener() {
+                    @Override
+                    public void onRequestPermissionsResult(String[] granted, String[] denied) {
+
+                    }
+
+                    @Override
+                    public void onAllGranted() {
+
+                    }
+                },Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE);
+            }
         }
     }
 }

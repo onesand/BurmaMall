@@ -44,6 +44,7 @@ public class HomeFragment extends BaseFragment<HomeModel> implements BannerListe
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+        mViewModel.requestFileManifest(getActivity());
         mViewModel.requestBannerData(mBanner,this);
     }
 

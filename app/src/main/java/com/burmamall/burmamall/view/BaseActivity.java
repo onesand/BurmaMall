@@ -5,8 +5,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.burmamall.burmamall.R;
 import com.burmamall.burmamall.utils.TUtil;
 import com.burmamall.burmamall.viewmodel.IViewModel;
+import com.jaeger.library.StatusBarUtil;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -23,6 +25,7 @@ public abstract class BaseActivity<ViewModel extends IViewModel> extends AppComp
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.title),0);
         mCompositeDisposable = new CompositeDisposable();
         mViewModel = getViewModel();
     }

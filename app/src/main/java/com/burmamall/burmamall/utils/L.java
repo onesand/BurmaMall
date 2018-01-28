@@ -6,8 +6,6 @@ import com.google.gson.Gson;
 
 /**
  * 日志打印类
- * <p>
- * Created by melorin on 2017/1/21.
  */
 public class L {
 

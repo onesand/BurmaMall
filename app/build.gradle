@@ -53,5 +53,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.1.0'
     //Banner
     compile 'com.youth.banner:banner:1.4.10'
+    //沉浸式
+    compile 'com.jaeger.statusbarutil:library:1.4.0'
 
 }

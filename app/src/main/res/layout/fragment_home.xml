@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!-- 搜索栏 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="43dp"
         android:orientation="horizontal"
         android:background="@color/title">
 
@@ -17,7 +18,7 @@
             android:orientation="vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp">
+            android:layout_marginBottom="5dp">
 
             <ImageView
                 android:layout_gravity="center"
@@ -42,7 +43,11 @@
     <com.youth.banner.Banner
         android:id="@+id/home_fragment_banner"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="150dp"
+        app:indicator_height="7dp"
+        app:indicator_width="7dp"
+        app:indicator_margin="3dp"
+        app:indicator_drawable_selected="@drawable/banner_selected">
     </com.youth.banner.Banner>
     <!-- banner end-->
 
