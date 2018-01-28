@@ -7,5 +7,8 @@ package com.burmamall.burmamall.config;
 
 public interface TimeConfig {
 
-    int SPLASH = 3;
+    /**
+     * APP 进去时候闪屏的时长
+     */
+    int SPLASH = 2;
 }

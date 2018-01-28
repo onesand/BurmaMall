@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.burmamall.burmamall.MainActivity;
+import com.burmamall.burmamall.view.fragment.MainFragment;
 
 /**
  * Created by sand on 2018/1/24.
@@ -12,7 +13,7 @@ import com.burmamall.burmamall.MainActivity;
 public class LauchConfig {
 
     public static void toMainActivity(Context context){
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, MainFragment.class);
         context.startActivity(intent);
     }
 }

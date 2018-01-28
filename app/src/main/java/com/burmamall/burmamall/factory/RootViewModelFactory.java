@@ -19,7 +19,7 @@ public class RootViewModelFactory implements IViewModelFactory{
 
     @Override
     public SplashModel getSplashModel() {
-        return new DrawableSplashModel(R.mipmap.ic_launcher);
+        return new DrawableSplashModel(R.mipmap.first);
     }
 
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BurmaMall</string>
+    <string name="main_home">နေအိမ်</string>
+    <string name="main_discovery">ရှာဖွေတွေ့ရှိမှု</string>
+    <string name="main_message">သတင်း</string>
+    <string name="main_cart">ကား</string>
+    <string name="main_my">ငါ</string>
+</resources>
