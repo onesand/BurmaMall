@@ -1,18 +1,24 @@
-package com.burmamall.burmamall.viewmodel.banner;
+package com.burmamall.burmamall.viewmodel.home;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.burmamall.burmamall.R;
+import com.burmamall.burmamall.http.BurmamallServiceApi;
+import com.burmamall.burmamall.model.BannerModel;
 import com.burmamall.burmamall.ui.BannerListener;
+import com.burmamall.burmamall.utils.ConstanModel;
+import com.burmamall.burmamall.utils.DBlog;
+import com.burmamall.burmamall.utils.FileHelper;
+import com.burmamall.burmamall.utils.JsonUtils;
+import com.burmamall.burmamall.utils.StringUtils;
 import com.burmamall.burmamall.utils.permission.OnPermissionResultListener;
 import com.burmamall.burmamall.utils.permission.PermissionsUtil;
+import com.lzy.okgo.model.Response;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -23,6 +29,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by sand on 2018/1/24.
  */
@@ -30,6 +40,7 @@ import java.util.List;
 public class HomeModel implements IHomeModel{
 
     private BannerListener bannerListener;
+    private List<BannerModel> bannerModels = new ArrayList<>();
 
     /**
      * 先查询服务器有没有更新 Banner
@@ -38,14 +49,44 @@ public class HomeModel implements IHomeModel{
     @Override
     public void requestBannerData(Banner banner,BannerListener bannerListener) {
         this.bannerListener = bannerListener;
-        //// TODO: 2018/1/28  查询服务器有没有更新
-        List<String> images = new ArrayList<>();
-        images.add("/sdcard/Pictures/Screenshots/11.jpg");
-        images.add("/sdcard/Pictures/Screenshots/12.jpg");
-        images.add("/sdcard/Pictures/Screenshots/13.jpg");
-        images.add("/sdcard/Pictures/Screenshots/14.jpg");
 
-        initBanner(banner,images);
+        List<File> temp = FileHelper.listFileSortByModifyTime(FileHelper.BANNER_IMAGE);
+        if (temp.size() > 5){
+            temp.subList(0,5);
+        }
+        initBanner(banner,temp);
+
+        BurmamallServiceApi.getBannerData().subscribe(new Observer<Response<String>>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Response<String> stringResponse) {
+                bannerModels = JsonUtils.jsonToList(stringResponse.body(),BannerModel.class);
+                for (BannerModel model : bannerModels){
+                    BurmamallServiceApi.downloadFile(this, ConstanModel.BurmamallApi.BASE_URL + model.getImg_path());
+                }
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+                List<String> images = new ArrayList<>();
+                for (BannerModel model : bannerModels){
+                    String name = StringUtils.getBannerImgName(model.getImg_path());
+                    images.add(FileHelper.BANNER_IMAGE + name);
+                }
+                banner.update(images);
+            }
+        });
+
+
     }
 
     /**
@@ -66,7 +107,7 @@ public class HomeModel implements IHomeModel{
         //设置自动轮播，默认为true
         banner.isAutoPlay(true);
         //设置轮播时间
-        banner.setDelayTime(1500);
+        banner.setDelayTime(3000);
         //设置指示器位置（当banner模式中有指示器时）
         banner.setIndicatorGravity(BannerConfig.CENTER);
         banner.setOnBannerListener(new OnBannerListener() {
@@ -109,12 +150,12 @@ public class HomeModel implements IHomeModel{
                 PermissionsUtil.requestPermissions(activity, new OnPermissionResultListener() {
                     @Override
                     public void onRequestPermissionsResult(String[] granted, String[] denied) {
-
+                        FileHelper.createFolder();
                     }
 
                     @Override
                     public void onAllGranted() {
-
+                        FileHelper.createFolder();
                     }
                 },Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE);
             }

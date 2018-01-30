@@ -1,6 +1,7 @@
 package com.burmamall.burmamall.factory;
 
-import com.burmamall.burmamall.viewmodel.banner.HomeModel;
+import com.burmamall.burmamall.viewmodel.home.HomeModel;
+import com.burmamall.burmamall.viewmodel.login.LoginModel;
 import com.burmamall.burmamall.viewmodel.splash.SplashModel;
 
 /**
@@ -13,4 +14,6 @@ public interface IViewModelFactory {
     HomeModel getBannerModel();
 
     SplashModel getSplashModel();
+
+    LoginModel getLoginModel();
 }

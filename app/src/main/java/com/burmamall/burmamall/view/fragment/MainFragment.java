@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.burmamall.burmamall.ECApplication;
 import com.burmamall.burmamall.R;
+import com.burmamall.burmamall.config.LauchConfig;
+import com.burmamall.burmamall.utils.ConstanModel;
 
 /**
  * Created by sand on 2018/1/27.
@@ -111,6 +114,13 @@ public class MainFragment extends FragmentActivity implements View.OnClickListen
     }
 
     private void switchTab(int id) {
+        if (id == R.id.tab_message_ll ||id == R.id.tab_cart_ll || id == R.id.tab_my_ll){
+            if (ECApplication.i().getLoginCode() == ConstanModel.Login.USER_UNLOGIN){
+                LauchConfig.toLoginActivity(this);
+                return;
+            }
+        }
+
         if (id == R.id.tab_home_ll){
             homeIcon.setBackgroundResource(R.mipmap.main_home_press);
             discoveryIcon.setBackgroundResource(R.mipmap.main_find_normal);

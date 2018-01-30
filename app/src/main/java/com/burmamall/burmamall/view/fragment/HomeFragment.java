@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.burmamall.burmamall.R;
 import com.burmamall.burmamall.factory.ViewModelFactory;
 import com.burmamall.burmamall.ui.BannerListener;
-import com.burmamall.burmamall.viewmodel.banner.HomeModel;
+import com.burmamall.burmamall.viewmodel.home.HomeModel;
 import com.youth.banner.Banner;
 
 /**

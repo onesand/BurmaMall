@@ -1,4 +1,4 @@
-package com.burmamall.burmamall.viewmodel.banner;
+package com.burmamall.burmamall.viewmodel.home;
 
 import android.app.Activity;
 

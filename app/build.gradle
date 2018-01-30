@@ -55,5 +55,11 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.10'
     //沉浸式
     compile 'com.jaeger.statusbarutil:library:1.4.0'
+    //okGo
+    compile 'com.lzy.net:okgo:3.0.4'
+    compile 'com.lzy.net:okrx2:2.0.2'
 
+
+    //FaceBook 登录服务
+//    compile 'com.facebook.android:facebook-login:[4,5)'
 }

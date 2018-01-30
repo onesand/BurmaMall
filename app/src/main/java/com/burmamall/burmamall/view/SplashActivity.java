@@ -1,4 +1,4 @@
-package com.burmamall.burmamall.view.splash;
+package com.burmamall.burmamall.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

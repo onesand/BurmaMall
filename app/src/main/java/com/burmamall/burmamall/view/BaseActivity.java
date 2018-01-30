@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 
 import com.burmamall.burmamall.R;
 import com.burmamall.burmamall.utils.TUtil;
@@ -26,6 +27,7 @@ public abstract class BaseActivity<ViewModel extends IViewModel> extends AppComp
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.title),0);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         mCompositeDisposable = new CompositeDisposable();
         mViewModel = getViewModel();
     }

@@ -1,8 +1,8 @@
 package com.burmamall.burmamall.factory;
 
 import com.burmamall.burmamall.R;
-import com.burmamall.burmamall.viewmodel.banner.IHomeModel;
-import com.burmamall.burmamall.viewmodel.banner.HomeModel;
+import com.burmamall.burmamall.viewmodel.home.HomeModel;
+import com.burmamall.burmamall.viewmodel.login.LoginModel;
 import com.burmamall.burmamall.viewmodel.splash.DrawableSplashModel;
 import com.burmamall.burmamall.viewmodel.splash.SplashModel;
 
@@ -22,5 +22,8 @@ public class RootViewModelFactory implements IViewModelFactory{
         return new DrawableSplashModel(R.mipmap.first);
     }
 
-
+    @Override
+    public LoginModel getLoginModel() {
+        return new LoginModel();
+    }
 }

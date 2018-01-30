@@ -10,4 +10,11 @@ public interface ConstanModel {
         int USER_LOGINED = 0;
         int USER_UNLOGIN = 1;
     }
+
+    interface BurmamallApi{
+
+        String BASE_URL = "http://111.231.215.157/Burmashop/";
+
+        String BANNER_URL = "http://111.231.215.157/Burmashop/interface/banner.php";
+    }
 }
