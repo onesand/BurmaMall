@@ -7,4 +7,6 @@
     <string name="main_cart">ကား</string>
     <string name="main_my">ငါ</string>
     <string name="scan">扫一扫</string>
+    <string name="setting">Setting</string>
+    <string name="logout_facebook">logout facebook</string>
 </resources>

@@ -2,6 +2,7 @@ package com.burmamall.burmamall.factory;
 
 import com.burmamall.burmamall.viewmodel.home.HomeModel;
 import com.burmamall.burmamall.viewmodel.login.LoginModel;
+import com.burmamall.burmamall.viewmodel.my.MyModel;
 import com.burmamall.burmamall.viewmodel.splash.SplashModel;
 
 /**
@@ -16,4 +17,6 @@ public interface IViewModelFactory {
     SplashModel getSplashModel();
 
     LoginModel getLoginModel();
+
+    MyModel getMyModel();
 }

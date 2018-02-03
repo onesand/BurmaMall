@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">BurmaMall</string>
+    <string name="facebook_app_id">2060466394165567</string>
+    <string name="fb_login_protocol_scheme">fb2060466394165567</string>
     <string name="main_home">Home</string>
     <string name="main_discovery">Discovery</string>
     <string name="main_message">Message</string>
     <string name="main_cart">Cart</string>
     <string name="main_my">My</string>
     <string name="scan">扫一扫</string>
+    <string name="setting">Setting</string>
+    <string name="logout_facebook">logout facebook</string>
 </resources>

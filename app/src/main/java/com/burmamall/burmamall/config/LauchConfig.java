@@ -17,6 +17,12 @@ public class LauchConfig {
         context.startActivity(intent);
     }
 
+    public static void toLoginActivity(Context context,int fromTag){
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.putExtra("from_tag",fromTag);
+        context.startActivity(intent);
+    }
+
     public static void toLoginActivity(Context context){
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);

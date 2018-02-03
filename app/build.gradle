@@ -61,5 +61,5 @@ dependencies {
 
 
     //FaceBook 登录服务
-//    compile 'com.facebook.android:facebook-login:[4,5)'
+    compile 'com.facebook.android:facebook-login:4.28.0'
 }

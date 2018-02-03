@@ -10,11 +10,14 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.burmamall.burmamall.http.BurmamallServiceApi;
 import com.burmamall.burmamall.model.BannerModel;
+import com.burmamall.burmamall.model.FlashDealsModel;
 import com.burmamall.burmamall.ui.BannerListener;
+import com.burmamall.burmamall.ui.RequestCommdoityListener;
 import com.burmamall.burmamall.utils.ConstanModel;
 import com.burmamall.burmamall.utils.DBlog;
 import com.burmamall.burmamall.utils.FileHelper;
 import com.burmamall.burmamall.utils.JsonUtils;
+import com.burmamall.burmamall.utils.MultiItemType;
 import com.burmamall.burmamall.utils.StringUtils;
 import com.burmamall.burmamall.utils.permission.OnPermissionResultListener;
 import com.burmamall.burmamall.utils.permission.PermissionsUtil;
@@ -56,7 +59,7 @@ public class HomeModel implements IHomeModel{
         }
         initBanner(banner,temp);
 
-        BurmamallServiceApi.getBannerData().subscribe(new Observer<Response<String>>() {
+        BurmamallServiceApi.getString(ConstanModel.BurmamallApi.BANNER_URL).subscribe(new Observer<Response<String>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
@@ -66,7 +69,7 @@ public class HomeModel implements IHomeModel{
             public void onNext(@NonNull Response<String> stringResponse) {
                 bannerModels = JsonUtils.jsonToList(stringResponse.body(),BannerModel.class);
                 for (BannerModel model : bannerModels){
-                    BurmamallServiceApi.downloadFile(this, ConstanModel.BurmamallApi.BASE_URL + model.getImg_path());
+                    BurmamallServiceApi.downloadFile(this, ConstanModel.BurmamallApi.BASE_URL + model.getImg_path(),FileHelper.BANNER_IMAGE);
                 }
             }
 
@@ -79,7 +82,7 @@ public class HomeModel implements IHomeModel{
             public void onComplete() {
                 List<String> images = new ArrayList<>();
                 for (BannerModel model : bannerModels){
-                    String name = StringUtils.getBannerImgName(model.getImg_path());
+                    String name = StringUtils.getImgName(model.getImg_path());
                     images.add(FileHelper.BANNER_IMAGE + name);
                 }
                 banner.update(images);
@@ -118,6 +121,34 @@ public class HomeModel implements IHomeModel{
         });
         //banner设置方法全部调用完毕时最后调用
         banner.start();
+    }
+
+    @Override
+    public void requestCommodityData(RequestCommdoityListener listener) {
+        //平台推荐
+        BurmamallServiceApi.getString(ConstanModel.BurmamallApi.FLASH_DEALS).subscribe(new Observer<Response<String>>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Response<String> stringResponse) {
+                List<FlashDealsModel> models = JsonUtils.jsonToList(stringResponse.body(),FlashDealsModel.class);
+                DBlog.ln("models.size==" +models.size());
+                listener.add(MultiItemType.FLASH_DEALS,models);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 
     @Override

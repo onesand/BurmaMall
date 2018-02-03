@@ -16,6 +16,7 @@ public class FileHelper {
 
     public final static String ROOT_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/burmaMall/";
     public final static String BANNER_IMAGE = ROOT_PATH + "banner/";
+    public final static String USER_IMAGE = ROOT_PATH + "userIcon/";
 
     static {
        createFolder();
@@ -27,6 +28,10 @@ public class FileHelper {
             dir.mkdirs();
 
         dir = new File(BANNER_IMAGE);
+        if (!dir.exists())
+            dir.mkdirs();
+
+        dir = new File(USER_IMAGE);
         if (!dir.exists())
             dir.mkdirs();
     }

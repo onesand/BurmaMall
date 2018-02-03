@@ -1,5 +1,6 @@
 package com.burmamall.burmamall.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import com.burmamall.burmamall.ECApplication;
 import com.burmamall.burmamall.R;
 import com.burmamall.burmamall.config.LauchConfig;
 import com.burmamall.burmamall.utils.ConstanModel;
+import com.burmamall.burmamall.utils.DBlog;
 
 /**
  * Created by sand on 2018/1/27.
@@ -113,10 +115,33 @@ public class MainFragment extends FragmentActivity implements View.OnClickListen
         MyTab.setOnClickListener(this);
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        int fromTag = intent.getIntExtra("from_tag",-1);
+        if (fromTag == 3){
+            switchTab( R.id.tab_message_ll);
+        } else if (fromTag == 4){
+            switchTab(R.id.tab_cart_ll);
+        } else if (fromTag == 5){
+            switchTab(R.id.tab_my_ll);
+        } else {
+            switchTab(R.id.tab_home_ll);
+        }
+    }
+
     private void switchTab(int id) {
         if (id == R.id.tab_message_ll ||id == R.id.tab_cart_ll || id == R.id.tab_my_ll){
+            int fromTag = -1;
+            if (id == R.id.tab_message_ll){
+                fromTag = 3;
+            } else if (id == R.id.tab_cart_ll){
+                fromTag = 4;
+            } else {
+                fromTag = 5;
+            }
             if (ECApplication.i().getLoginCode() == ConstanModel.Login.USER_UNLOGIN){
-                LauchConfig.toLoginActivity(this);
+                LauchConfig.toLoginActivity(this,fromTag);
                 return;
             }
         }

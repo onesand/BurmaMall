@@ -1,7 +1,15 @@
 package com.burmamall.burmamall;
 
+import android.os.Bundle;
+import android.util.Log;
+
+import com.burmamall.burmamall.model.FacebookUserInfoModel;
 import com.burmamall.burmamall.utils.ConstanModel;
 import com.burmamall.burmamall.utils.DBlog;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -11,6 +19,8 @@ import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.HttpParams;
+
+import org.json.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -24,7 +34,11 @@ import okhttp3.OkHttpClient;
 public class ECApplication extends android.app.Application{
 
     public int loginCode = ConstanModel.Login.USER_UNLOGIN;
+    private int loginType = -1;
     private static ECApplication instance;
+    private  FacebookUserInfoModel userInfoModel;
+    private boolean facebookLogin = false;
+
 
     public ECApplication(){
         instance = this;
@@ -34,14 +48,50 @@ public class ECApplication extends android.app.Application{
         return instance;
     }
 
-    public int getLoginCode(){
-        return loginCode;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
         initHttpUtils();
+        facebookLogin = !(AccessToken.getCurrentAccessToken() == null);
+        getFacebookLoginInfo();
+    }
+
+    /**
+     * 退出登录刷新登录缓存
+     */
+    public void refreshFBLoginStatus(){
+        facebookLogin = !(AccessToken.getCurrentAccessToken() == null);
+        if (facebookLogin){
+            loginCode = ConstanModel.Login.USER_LOGINED;
+            loginType = ConstanModel.LoginType.FACEBOOK;;
+        } else {
+            loginCode = ConstanModel.Login.USER_UNLOGIN;
+            loginType = -1;
+        }
+    }
+
+    /**
+     * 获取是否登录
+     */
+    public int getLoginCode(){
+        if (facebookLogin){
+            loginCode = ConstanModel.Login.USER_LOGINED;
+        }
+        return loginCode;
+    }
+
+    /**
+     * 获取登录方式
+     */
+    public int getLoginType(){
+        if (getLoginCode() == ConstanModel.Login.USER_LOGINED){
+            if (facebookLogin){
+                loginType = ConstanModel.LoginType.FACEBOOK;
+            } else {
+                loginType = ConstanModel.LoginType.NORMAL;
+            }
+        }
+        return loginType;
     }
 
     public void initHttpUtils(){
@@ -84,5 +134,31 @@ public class ECApplication extends android.app.Application{
                 .setRetryCount(3)                               //全局统一超时重连次数，默认为三次，那么最差的情况会请求4次(一次原始请求，三次重连请求)，不需要可以设置为0
                 .addCommonHeaders(headers)                      //全局公共头
                 .addCommonParams(params);                       //全局公共参数
+    }
+
+    private void getFacebookLoginInfo() {
+        if (facebookLogin){
+            GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                @Override
+                public void onCompleted(JSONObject object, GraphResponse response) {
+                    if (object != null) {
+                        userInfoModel = new Gson().fromJson(object.toString(), FacebookUserInfoModel.class);
+                        DBlog.ln("userInfoModel :" + userInfoModel.toString());
+                    }
+                }
+            });
+            Bundle parameters = new Bundle();
+            parameters.putString("fields", "id,name,link,gender,birthday,email,picture,locale,updated_time,timezone,age_range,first_name,last_name");
+            request.setParameters(parameters);
+            request.executeAsync() ;
+        }
+    }
+
+    public FacebookUserInfoModel getUserInfoModel() {
+        return userInfoModel;
+    }
+
+    public void setUserInfoModel(FacebookUserInfoModel userInfoModel) {
+        this.userInfoModel = userInfoModel;
     }
 }

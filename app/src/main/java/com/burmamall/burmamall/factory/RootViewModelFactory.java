@@ -3,6 +3,7 @@ package com.burmamall.burmamall.factory;
 import com.burmamall.burmamall.R;
 import com.burmamall.burmamall.viewmodel.home.HomeModel;
 import com.burmamall.burmamall.viewmodel.login.LoginModel;
+import com.burmamall.burmamall.viewmodel.my.MyModel;
 import com.burmamall.burmamall.viewmodel.splash.DrawableSplashModel;
 import com.burmamall.burmamall.viewmodel.splash.SplashModel;
 
@@ -25,5 +26,10 @@ public class RootViewModelFactory implements IViewModelFactory{
     @Override
     public LoginModel getLoginModel() {
         return new LoginModel();
+    }
+
+    @Override
+    public MyModel getMyModel() {
+        return new MyModel();
     }
 }

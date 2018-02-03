@@ -13,7 +13,6 @@ import com.lzy.okrx2.adapter.ObservableResponse;
 import java.io.File;
 
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -23,19 +22,19 @@ import io.reactivex.schedulers.Schedulers;
 
 public class BurmamallServiceApi {
 
-    public static Observable<Response<String>> getBannerData(){
-        return OkGo.<String>get(ConstanModel.BurmamallApi.BANNER_URL)
+    public static Observable<Response<String>> getString(String url){
+        return OkGo.<String>get(url)
                 .converter(new StringConvert())
                 .adapt(new ObservableResponse<String>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static void downloadFile(Object tag,String url){
+    public static void downloadFile(Object tag,String url,String savePath){
 
         OkGo.<File>get(url)
                 .tag(tag)
-                .execute(new FileCallback(FileHelper.BANNER_IMAGE, StringUtils.getBannerImgName(url)) {
+                .execute(new FileCallback(savePath, StringUtils.getImgName(url)) {
                     @Override
                     public void onSuccess(Response<File> response) {
 
