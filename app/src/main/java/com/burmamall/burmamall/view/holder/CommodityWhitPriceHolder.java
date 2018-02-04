@@ -11,13 +11,13 @@ import com.burmamall.burmamall.R;
  * Created by sand on 2018/2/2.
  */
 
-public class CommdityWhitPriceHolder extends RecyclerView.ViewHolder{
+public class CommodityWhitPriceHolder extends RecyclerView.ViewHolder{
 
     private ImageView commdityIcon;
     private TextView commdityPriceTv;
     private View v;
 
-    public CommdityWhitPriceHolder(View itemView) {
+    public CommodityWhitPriceHolder(View itemView) {
         super(itemView);
         this.v = itemView;
     }

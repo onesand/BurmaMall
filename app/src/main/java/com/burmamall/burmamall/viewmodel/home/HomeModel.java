@@ -9,8 +9,11 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.burmamall.burmamall.http.BurmamallServiceApi;
+import com.burmamall.burmamall.model.ADModel;
 import com.burmamall.burmamall.model.BannerModel;
 import com.burmamall.burmamall.model.FlashDealsModel;
+import com.burmamall.burmamall.model.HotBrandModel;
+import com.burmamall.burmamall.model.StoreModel;
 import com.burmamall.burmamall.ui.BannerListener;
 import com.burmamall.burmamall.ui.RequestCommdoityListener;
 import com.burmamall.burmamall.utils.ConstanModel;
@@ -124,8 +127,35 @@ public class HomeModel implements IHomeModel{
     }
 
     @Override
+    public void requestAd(ImageView imageView) {
+        BurmamallServiceApi.getString(ConstanModel.BurmamallApi.AD).subscribe(new Observer<Response<String>>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Response<String> stringResponse) {
+                List<ADModel> models = JsonUtils.jsonToList(stringResponse.body(),ADModel.class);
+                DBlog.ln("ADModel.size==" +models.size());
+                Glide.with(imageView.getContext()).load(ConstanModel.BurmamallApi.BASE_URL + models.get(0).getImg_path()).into(imageView);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    @Override
     public void requestCommodityData(RequestCommdoityListener listener) {
-        //平台推荐
+        //平台推荐 flash deals
         BurmamallServiceApi.getString(ConstanModel.BurmamallApi.FLASH_DEALS).subscribe(new Observer<Response<String>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
@@ -135,8 +165,129 @@ public class HomeModel implements IHomeModel{
             @Override
             public void onNext(@NonNull Response<String> stringResponse) {
                 List<FlashDealsModel> models = JsonUtils.jsonToList(stringResponse.body(),FlashDealsModel.class);
-                DBlog.ln("models.size==" +models.size());
+                DBlog.ln("FlashDealsModel.size==" +models.size());
                 listener.add(MultiItemType.FLASH_DEALS,models);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+        //热门商标 hot brand
+        BurmamallServiceApi.getString(ConstanModel.BurmamallApi.HOT_BRAND).subscribe(new Observer<Response<String>>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Response<String> stringResponse) {
+                List<HotBrandModel> models = JsonUtils.jsonToList(stringResponse.body(),HotBrandModel.class);
+                DBlog.ln("HotBrandModel.size==" +models.size());
+                listener.add(MultiItemType.HOT_BRAND,models);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+        //new arrive
+        BurmamallServiceApi.getString(ConstanModel.BurmamallApi.NEW_ARRIVE).subscribe(new Observer<Response<String>>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Response<String> stringResponse) {
+                List<FlashDealsModel> models = JsonUtils.jsonToList(stringResponse.body(),FlashDealsModel.class);
+                DBlog.ln("new arrive FlashDealsModel.size==" +models.size());
+                listener.add(MultiItemType.NEW_ARRIVE,models);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+        //hot categories
+        BurmamallServiceApi.getString(ConstanModel.BurmamallApi.HOT_CATEGORIES).subscribe(new Observer<Response<String>>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Response<String> stringResponse) {
+                List<FlashDealsModel> models = JsonUtils.jsonToList(stringResponse.body(),FlashDealsModel.class);
+                DBlog.ln("hot categories FlashDealsModel.size==" +models.size());
+                listener.add(MultiItemType.HOT_CATEGORIES,models);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+        //store
+        BurmamallServiceApi.getString(ConstanModel.BurmamallApi.STORE).subscribe(new Observer<Response<String>>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Response<String> stringResponse) {
+                List<StoreModel> models = JsonUtils.jsonToList(stringResponse.body(),StoreModel.class);
+                DBlog.ln("storeModel.size==" + models.size());
+                listener.add(MultiItemType.STORE,models);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+        //guess you like
+        BurmamallServiceApi.getString(ConstanModel.BurmamallApi.GUESS_YOU_LIKE).subscribe(new Observer<Response<String>>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Response<String> stringResponse) {
+                List<FlashDealsModel> models = JsonUtils.jsonToList(stringResponse.body(),FlashDealsModel.class);
+                DBlog.ln("guess you like model.size==" + models.size());
+                listener.add(MultiItemType.GUESS_YOU_LIKE,models);
             }
 
             @Override

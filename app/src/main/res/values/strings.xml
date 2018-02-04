@@ -10,4 +10,11 @@
     <string name="scan">扫一扫</string>
     <string name="setting">Setting</string>
     <string name="logout_facebook">logout facebook</string>
+    <string name="flash_deals">Flash Deals</string>
+    <string name="hot_brand">Hot Brand</string>
+    <string name="new_arrive">New arrive</string>
+    <string name="hot_categories">Hot Categories</string>
+    <string name="store">Store</string>
+    <string name="guess_you_like">Guess You Like</string>
+    <string name="see">See</string>
 </resources>

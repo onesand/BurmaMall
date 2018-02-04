@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.burmamall.burmamall.R;
-import com.burmamall.burmamall.model.FlashDealsModel;
+import com.burmamall.burmamall.model.HotBrandModel;
 import com.burmamall.burmamall.utils.ConstanModel;
 import com.burmamall.burmamall.view.holder.CommodityWhitPriceHolder;
 
@@ -18,12 +18,12 @@ import java.util.List;
  * Created by sand on 2018/2/3.
  */
 
-public class FlashDealsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HotBrandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<FlashDealsModel> data;
+    private List<HotBrandModel> data;
     private Context context;
 
-    public FlashDealsAdapter(List<FlashDealsModel> data,Context context) {
+    public HotBrandAdapter(List<HotBrandModel> data, Context context) {
         this.data = data;
         this.context = context;
     }
@@ -38,9 +38,8 @@ public class FlashDealsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder h, int position) {
         CommodityWhitPriceHolder holder = (CommodityWhitPriceHolder) h;
-        holder.getCommdityPriceTv().setText("$" + data.get(position).getSell_price());
-        holder.getCommdityPriceTv().setTextColor(context.getResources().getColor(R.color.red));
-        Glide.with(context).load(ConstanModel.BurmamallApi.BASE_URL + data.get(position).getImg()).into(holder.getCommdityIcon());
+        holder.getCommdityPriceTv().setVisibility(View.GONE);
+        Glide.with(context).load(ConstanModel.BurmamallApi.BASE_URL + data.get(position).getLogo()).into(holder.getCommdityIcon());
     }
 
     @Override

@@ -62,4 +62,6 @@ dependencies {
 
     //FaceBook 登录服务
     compile 'com.facebook.android:facebook-login:4.28.0'
+
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4'
 }

@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 import com.burmamall.burmamall.R;
 import com.burmamall.burmamall.model.FlashDealsModel;
 import com.burmamall.burmamall.utils.ConstanModel;
-import com.burmamall.burmamall.view.holder.CommodityWhitPriceHolder;
+import com.burmamall.burmamall.view.holder.GuessYouLikeItemHolder;
 
 import java.util.List;
 
@@ -18,12 +18,12 @@ import java.util.List;
  * Created by sand on 2018/2/3.
  */
 
-public class FlashDealsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class GuessYouLikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<FlashDealsModel> data;
     private Context context;
 
-    public FlashDealsAdapter(List<FlashDealsModel> data,Context context) {
+    public GuessYouLikeAdapter(List<FlashDealsModel> data, Context context) {
         this.data = data;
         this.context = context;
     }
@@ -31,20 +31,26 @@ public class FlashDealsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.commdity_wit_price_item,parent,false);
-        return new CommodityWhitPriceHolder(view);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.commdity_wit_price_title_item,parent,false);
+        return new GuessYouLikeItemHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder h, int position) {
-        CommodityWhitPriceHolder holder = (CommodityWhitPriceHolder) h;
+        GuessYouLikeItemHolder holder = (GuessYouLikeItemHolder) h;
         holder.getCommdityPriceTv().setText("$" + data.get(position).getSell_price());
-        holder.getCommdityPriceTv().setTextColor(context.getResources().getColor(R.color.red));
+        holder.getCommdityPriceTv().setTextColor(context.getResources().getColor(R.color.black));
+        holder.getCommodityTitle().setText(data.get(position).getName());
         Glide.with(context).load(ConstanModel.BurmamallApi.BASE_URL + data.get(position).getImg()).into(holder.getCommdityIcon());
     }
 
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void addData(List<FlashDealsModel> t){
+        data.addAll(t);
+//        notifyDataSetChanged();
     }
 }

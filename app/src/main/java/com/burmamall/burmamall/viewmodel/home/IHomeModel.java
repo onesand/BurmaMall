@@ -1,6 +1,7 @@
 package com.burmamall.burmamall.viewmodel.home;
 
 import android.app.Activity;
+import android.widget.ImageView;
 
 import com.burmamall.burmamall.ui.BannerListener;
 import com.burmamall.burmamall.ui.RequestCommdoityListener;
@@ -22,4 +23,6 @@ public interface IHomeModel extends IViewModel{
     void requestFileManifest(Activity activity);
 
     void requestCommodityData(RequestCommdoityListener listener);
+
+    void requestAd(ImageView imageView);
 }
