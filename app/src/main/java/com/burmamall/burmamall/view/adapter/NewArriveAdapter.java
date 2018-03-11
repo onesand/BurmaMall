@@ -54,12 +54,14 @@ public class NewArriveAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(this.context).inflate(R.layout.commdity_wit_price_item, null);
             viewHolder.commodityIcon = (ImageView) convertView.findViewById(R.id.commodity_icon);
             viewHolder.commodityPrice = (TextView) convertView.findViewById(R.id.commodity_price);
+            viewHolder.commodityOldPrice = (TextView) convertView.findViewById(R.id.commodity_old_price);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         viewHolder.commodityPrice.setVisibility(View.GONE);
+        viewHolder.commodityOldPrice.setVisibility(View.GONE);
         Glide.with(context).load(ConstanModel.BurmamallApi.BASE_URL + data.get(position).getImg()).into(viewHolder.commodityIcon);
         return convertView;
     }
@@ -67,5 +69,6 @@ public class NewArriveAdapter extends BaseAdapter {
     class ViewHolder {
         public TextView commodityPrice;
         public ImageView commodityIcon;
+        public TextView commodityOldPrice;
     }
 }

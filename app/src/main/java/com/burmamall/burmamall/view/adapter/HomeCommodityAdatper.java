@@ -49,6 +49,7 @@ public class HomeCommodityAdatper extends RecyclerView.Adapter<RecyclerView.View
     private Context context;
     private Activity activity;
     private GuessYouLikeAdapter guessYouLikeAdapter;
+    private int loadMoreCount = 2;
 
     public HomeCommodityAdatper(List<HomeCommodityModel> commodityModels,Context context) {
         this.commodityModels = commodityModels;
@@ -240,7 +241,7 @@ public class HomeCommodityAdatper extends RecyclerView.Adapter<RecyclerView.View
 
     public void loadMoreGuessYouLike(RefreshLayout refreshLayout){
         //guess you like
-        BurmamallServiceApi.getString(ConstanModel.BurmamallApi.GUESS_YOU_LIKE + "?p=2").subscribe(new Observer<Response<String>>() {
+        BurmamallServiceApi.getString(ConstanModel.BurmamallApi.GUESS_YOU_LIKE + "?p=" + loadMoreCount).subscribe(new Observer<Response<String>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
@@ -260,6 +261,7 @@ public class HomeCommodityAdatper extends RecyclerView.Adapter<RecyclerView.View
 
             @Override
             public void onComplete() {
+                loadMoreCount++;
                 refreshLayout.finishLoadmore(true);
                 notifyDataSetChanged();
             }

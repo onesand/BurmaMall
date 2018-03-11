@@ -39,6 +39,7 @@ public class HotBrandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder h, int position) {
         CommodityWhitPriceHolder holder = (CommodityWhitPriceHolder) h;
         holder.getCommdityPriceTv().setVisibility(View.GONE);
+        holder.getCommdityOldPriceTv().setVisibility(View.GONE);
         Glide.with(context).load(ConstanModel.BurmamallApi.BASE_URL + data.get(position).getLogo()).into(holder.getCommdityIcon());
     }
 

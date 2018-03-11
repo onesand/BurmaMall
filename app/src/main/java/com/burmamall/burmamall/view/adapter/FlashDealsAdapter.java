@@ -1,6 +1,7 @@
 package com.burmamall.burmamall.view.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,8 @@ public class FlashDealsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         CommodityWhitPriceHolder holder = (CommodityWhitPriceHolder) h;
         holder.getCommdityPriceTv().setText("$" + data.get(position).getSell_price());
         holder.getCommdityPriceTv().setTextColor(context.getResources().getColor(R.color.red));
+        holder.getCommdityOldPriceTv().setText("$" + data.get(position).getMarket_price());
+        holder.getCommdityOldPriceTv().getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
         Glide.with(context).load(ConstanModel.BurmamallApi.BASE_URL + data.get(position).getImg()).into(holder.getCommdityIcon());
     }
 

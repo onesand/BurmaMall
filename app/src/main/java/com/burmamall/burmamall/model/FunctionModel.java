@@ -1,25 +1,25 @@
 package com.burmamall.burmamall.model;
 
 /**
- * Created by sand on 2018/2/4.
+ * Created by sand on 2018/2/6.
  */
 
-public class ADModel {
+public class FunctionModel {
 
 
     /**
-     * id : 1
-     * name : 平台推荐
-     * type : 3
-     * img_path : upload/2018/01/31/20180131175032964.jpg
-     * link :
+     * id : 6
+     * name : 5
+     * logo : upload/admin/logo/2018/02/06/20180206032515496.png
+     * link : http://111.231.215.157/Burmashop/
+     * type : 1
      */
 
     private String id;
     private String name;
-    private String type;
-    private String img_path;
+    private String logo;
     private String link;
+    private String type;
 
     public String getId() {
         return id;
@@ -37,20 +37,12 @@ public class ADModel {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getLogo() {
+        return logo;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getImg_path() {
-        return img_path;
-    }
-
-    public void setImg_path(String img_path) {
-        this.img_path = img_path;
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public String getLink() {
@@ -59,5 +51,13 @@ public class ADModel {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -15,6 +15,7 @@ public class CommodityWhitPriceHolder extends RecyclerView.ViewHolder{
 
     private ImageView commdityIcon;
     private TextView commdityPriceTv;
+    private TextView commdityOldPriceTv;
     private View v;
 
     public CommodityWhitPriceHolder(View itemView) {
@@ -34,5 +35,12 @@ public class CommodityWhitPriceHolder extends RecyclerView.ViewHolder{
             commdityPriceTv = (TextView) v.findViewById(R.id.commodity_price);
         }
         return commdityPriceTv;
+    }
+
+    public TextView getCommdityOldPriceTv() {
+        if (commdityOldPriceTv == null){
+            commdityOldPriceTv = (TextView) v.findViewById(R.id.commodity_old_price);
+        }
+        return commdityOldPriceTv;
     }
 }

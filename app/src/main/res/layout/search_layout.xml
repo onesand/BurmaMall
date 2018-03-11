@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="43dp"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/search_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/search_corners">
+
+        <ImageView
+            android:id="@+id/search_layout_search_icon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@mipmap/search_icon"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/search_layout_hint"
+            android:clickable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/search_layout_search_icon"
+            android:layout_marginLeft="10dp"
+            android:hint="1111"/>
+
+        <ImageView
+            android:id="@+id/search_layout_camera_icon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/camera_icon"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

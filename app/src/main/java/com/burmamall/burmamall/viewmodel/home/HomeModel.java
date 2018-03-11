@@ -12,9 +12,11 @@ import com.burmamall.burmamall.http.BurmamallServiceApi;
 import com.burmamall.burmamall.model.ADModel;
 import com.burmamall.burmamall.model.BannerModel;
 import com.burmamall.burmamall.model.FlashDealsModel;
+import com.burmamall.burmamall.model.FunctionModel;
 import com.burmamall.burmamall.model.HotBrandModel;
 import com.burmamall.burmamall.model.StoreModel;
 import com.burmamall.burmamall.ui.BannerListener;
+import com.burmamall.burmamall.ui.FunctionDataListener;
 import com.burmamall.burmamall.ui.RequestCommdoityListener;
 import com.burmamall.burmamall.utils.ConstanModel;
 import com.burmamall.burmamall.utils.DBlog;
@@ -298,6 +300,36 @@ public class HomeModel implements IHomeModel{
             @Override
             public void onComplete() {
 
+            }
+        });
+    }
+
+    @Override
+    public void requestFunction(FunctionDataListener listener) {
+
+        BurmamallServiceApi.getString(ConstanModel.BurmamallApi.FUNCTION).subscribe(new Observer<Response<String>>() {
+
+            List<FunctionModel> functionModels = new ArrayList<>();
+
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Response<String> stringResponse) {
+                functionModels = JsonUtils.jsonToList(stringResponse.body(),FunctionModel.class);
+                DBlog.ln("FunctionModel.size==" + functionModels.size());
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                listener.functionDataListenerComplete(functionModels);
             }
         });
     }

@@ -81,6 +81,7 @@ public class StoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             CommodityWhitPriceHolder commodityWhitPriceHolder = (CommodityWhitPriceHolder) holder;
             FlashDealsModel model = data.get(position);
             commodityWhitPriceHolder.getCommdityPriceTv().setVisibility(View.VISIBLE);
+            commodityWhitPriceHolder.getCommdityOldPriceTv().setVisibility(View.GONE);
             commodityWhitPriceHolder.getCommdityPriceTv().setText("$" + data.get(position).getSell_price());
             commodityWhitPriceHolder.getCommdityPriceTv().setTextColor(context.getResources().getColor(R.color.black));
             Glide.with(context).load(ConstanModel.BurmamallApi.BASE_URL + data.get(position).getImg()).into(commodityWhitPriceHolder.getCommdityIcon());

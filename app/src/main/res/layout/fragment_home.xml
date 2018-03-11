@@ -15,28 +15,26 @@
         android:background="@color/title">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="5dp">
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_gravity="center"
-                android:id="@+id/home_fragment_scan"
-                android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:background="@mipmap/scan"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/scan"
-                android:textColor="@color/white"
-                android:textSize="10dp"/>
+            <include
+                layout="@layout/search_layout" />
 
         </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/home_fragment_search_message"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/main_message_normal"/>
+
 
     </LinearLayout>
     <!-- 搜索栏end -->
@@ -45,82 +43,82 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            <!-- banner -->
-            <com.youth.banner.Banner
-                android:id="@+id/home_fragment_banner"
-                android:layout_width="match_parent"
-                android:layout_height="132dp"
-                app:indicator_height="7dp"
-                app:indicator_width="7dp"
-                app:indicator_margin="3dp"
-                app:indicator_drawable_selected="@drawable/banner_selected">
-            </com.youth.banner.Banner>
-            <!-- banner end-->
+            android:fillViewport="true">
 
-            <!-- 功能栏 -->
-            
             <LinearLayout
-                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="175dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
-
-                <com.burmamall.burmamall.widget.AutoMaticPageGridView
-                    android:id="@+id/automatic"
+                <!-- banner -->
+                <com.youth.banner.Banner
+                    android:id="@+id/home_fragment_banner"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:auto_button="@drawable/gridview_selector"
-                    auto:auto_column="5"
-                    auto:auto_lines="2"/>
+                    android:layout_height="132dp"
+                    app:indicator_height="7dp"
+                    app:indicator_width="7dp"
+                    app:indicator_margin="3dp"
+                    app:indicator_drawable_selected="@drawable/banner_selected">
+                </com.youth.banner.Banner>
+                <!-- banner end-->
+
+                <!-- 功能栏 -->
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="175dp"
+                    android:orientation="vertical">
+
+                    <com.burmamall.burmamall.widget.AutoMaticPageGridView
+                        android:id="@+id/automatic"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:auto_button="@drawable/gridview_selector"
+                        auto:auto_column="5"
+                        auto:auto_lines="2"/>
+
+                </LinearLayout>
+                <!-- 功能栏 end -->
+
+                <!-- 广告位 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gray">
+                    <ImageView
+                        android:layout_margin="10dp"
+                        android:id="@+id/home_fragment_advertising"
+                        android:layout_width="match_parent"
+                        android:layout_height="84dp"
+                        android:scaleType="fitXY"/>
+                </LinearLayout>
+                <!-- 广告位 end-->
+
+                <!-- 商品列表 -->
+                <RelativeLayout
+                    android:id="@+id/home_fragment_commodity_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:background="@color/gray"
+                        android:id="@+id/home_fragment_recyclerview"
+                        android:scrollbars="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </android.support.v7.widget.RecyclerView>
+
+                </RelativeLayout>
+
+                <!-- 商品列表 end-->
 
             </LinearLayout>
-            <!-- 功能栏 end -->
-            
-            <!-- 广告位 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/gray">
-                <ImageView
-                    android:layout_margin="10dp"
-                    android:id="@+id/home_fragment_advertising"
-                    android:layout_width="match_parent"
-                    android:layout_height="84dp"
-                    android:scaleType="fitXY"/>
-            </LinearLayout>
-            <!-- 广告位 end-->
 
-            <!-- 商品列表 -->
-            <RelativeLayout
-                android:id="@+id/home_fragment_commodity_rl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:descendantFocusability="blocksDescendants">
-
-                <android.support.v7.widget.RecyclerView
-                    android:background="@color/gray"
-                    android:id="@+id/home_fragment_recyclerview"
-                    android:scrollbars="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </android.support.v7.widget.RecyclerView>
-
-            </RelativeLayout>
-
-            <!-- 商品列表 end-->
-
-        </LinearLayout>
-
-    </android.support.v4.widget.NestedScrollView>
+        </android.support.v4.widget.NestedScrollView>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

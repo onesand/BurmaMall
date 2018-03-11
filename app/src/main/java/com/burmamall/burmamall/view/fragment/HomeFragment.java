@@ -9,12 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.burmamall.burmamall.R;
 import com.burmamall.burmamall.factory.ViewModelFactory;
+import com.burmamall.burmamall.model.FunctionModel;
 import com.burmamall.burmamall.model.HomeCommodityModel;
 import com.burmamall.burmamall.ui.BannerListener;
+import com.burmamall.burmamall.ui.FunctionDataListener;
 import com.burmamall.burmamall.ui.RequestCommdoityListener;
 import com.burmamall.burmamall.utils.FullyLinearLayoutManager;
 import com.burmamall.burmamall.utils.MultiItemType;
@@ -35,7 +39,7 @@ import java.util.List;
  * Created by sand on 2018/1/27.
  */
 
-public class HomeFragment extends BaseFragment<HomeModel> implements BannerListener,RequestCommdoityListener{
+public class HomeFragment extends BaseFragment<HomeModel> implements BannerListener,RequestCommdoityListener, FunctionDataListener {
 
     private View view;
     private Banner mBanner;
@@ -48,6 +52,9 @@ public class HomeFragment extends BaseFragment<HomeModel> implements BannerListe
     private List<HomeCommodityModel> commodityModels = new ArrayList<>();
     private ImageView adImage;
     private ZProgressHUD progressHUD;
+    private RelativeLayout searchMainRl;
+    private TextView searchHint;
+    private ImageView searchCream;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,33 +81,39 @@ public class HomeFragment extends BaseFragment<HomeModel> implements BannerListe
         progressHUD.setCancelable(false);
         progressHUD.show();
         initView();
+        initSearchView();
         mViewModel.requestFileManifest(getActivity());
         mViewModel.requestBannerData(mBanner,this);
+        mViewModel.requestFunction(this);
         mViewModel.requestAd(adImage);
         mViewModel.requestCommodityData(this);
 
-        //功能栏
-        automatic = (AutoMaticPageGridView) view.findViewById(R.id.automatic);
-        functionDatas = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            functionDatas.add(i);
-        }
-        adapter = new HomePageAdapter(getActivity(), functionDatas);
-        automatic.setAdapter(adapter);
-        automatic.setOnItemClickListener(new AutoMaticPageGridView.OnItemClickCallBack() {
+    }
+
+    private void initSearchView() {
+        searchHint.setHint("input search");
+        searchMainRl.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void OnItemClicked(int position, Object object) {
-                Toast.makeText(getActivity(), position + "--", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"跳转搜索界面",Toast.LENGTH_SHORT).show();
             }
         });
-
-
+        searchCream.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"cream",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initView() {
         mBanner = (Banner) view.findViewById(R.id.home_fragment_banner);
         commodityRecyclerView = (RecyclerView) view.findViewById(R.id.home_fragment_recyclerview);
         smartRefreshLayout = (SmartRefreshLayout) view.findViewById(R.id.guess_you_like_item_smartrefresh);
+        searchCream = (ImageView) view.findViewById(R.id.search_layout_camera_icon);
+        searchHint = (TextView) view.findViewById(R.id.search_layout_hint);
+        searchMainRl = (RelativeLayout) view.findViewById(R.id.search_rl);
+        automatic = (AutoMaticPageGridView) view.findViewById(R.id.automatic);
         smartRefreshLayout.setEnableLoadmore(true);
         smartRefreshLayout.setEnableRefresh(false);
         adImage = (ImageView) view.findViewById(R.id.home_fragment_advertising);
@@ -122,14 +135,6 @@ public class HomeFragment extends BaseFragment<HomeModel> implements BannerListe
         HomeCommodityModel model = new HomeCommodityModel();
         model.setType(type);
         model.setData(data);
-
-//        if (type == MultiItemType.FLASH_DEALS){
-//            commodityModels.add(0,model);
-//        } else if (type == MultiItemType.HOT_BRAND){
-//            commodityModels.add(1,model);
-//        } else if (type == MultiItemType.NEW_ARRIVE){
-//            commodityModels.add(2,model);
-//        }
         commodityModels.add(model);
 
         if (commodityModels.size() == 6){
@@ -186,5 +191,19 @@ public class HomeFragment extends BaseFragment<HomeModel> implements BannerListe
             commodityRecyclerView.setAdapter(commodityAdatper);
             progressHUD.dismiss();
         }
+    }
+
+    @Override
+    public void functionDataListenerComplete(List<FunctionModel> functionModels) {
+        //功能栏
+        adapter = new HomePageAdapter(getActivity(), functionModels);
+        automatic.setAdapter(adapter);
+        automatic.setOnItemClickListener(new AutoMaticPageGridView.OnItemClickCallBack() {
+            @Override
+            public void OnItemClicked(int position, Object object) {
+                Toast.makeText(getActivity(), functionModels.get(position).getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

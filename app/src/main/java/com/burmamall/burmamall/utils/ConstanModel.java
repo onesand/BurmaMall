@@ -41,5 +41,7 @@ public interface ConstanModel {
         String GUESS_YOU_LIKE = "http://111.231.215.157/Burmashop/interface/guess_youlike.php";
 
         String AD = "http://111.231.215.157/Burmashop/interface/ad.php";
+
+        String FUNCTION = "http://111.231.215.157/Burmashop/interface/nav.php";
     }
 }

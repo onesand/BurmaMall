@@ -3,7 +3,9 @@ package com.burmamall.burmamall.viewmodel.home;
 import android.app.Activity;
 import android.widget.ImageView;
 
+import com.burmamall.burmamall.model.FunctionModel;
 import com.burmamall.burmamall.ui.BannerListener;
+import com.burmamall.burmamall.ui.FunctionDataListener;
 import com.burmamall.burmamall.ui.RequestCommdoityListener;
 import com.burmamall.burmamall.viewmodel.IViewModel;
 import com.youth.banner.Banner;
@@ -25,4 +27,6 @@ public interface IHomeModel extends IViewModel{
     void requestCommodityData(RequestCommdoityListener listener);
 
     void requestAd(ImageView imageView);
+
+    void requestFunction(FunctionDataListener listener);
 }

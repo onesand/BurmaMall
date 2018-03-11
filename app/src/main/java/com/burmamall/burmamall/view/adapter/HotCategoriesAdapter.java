@@ -54,12 +54,14 @@ public class HotCategoriesAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(this.context).inflate(R.layout.commdity_wit_price_item, null);
             viewHolder.commodityIcon = (ImageView) convertView.findViewById(R.id.commodity_icon);
             viewHolder.commodityPrice = (TextView) convertView.findViewById(R.id.commodity_price);
+            viewHolder.commodityOldPrice = (TextView) convertView.findViewById(R.id.commodity_old_price);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.commodityPrice.setTextColor(context.getResources().getColor(R.color.gray1));
         viewHolder.commodityPrice.setText(data.get(position).getName());
+        viewHolder.commodityOldPrice.setVisibility(View.GONE);
         Glide.with(context).load(ConstanModel.BurmamallApi.BASE_URL + data.get(position).getImg()).into(viewHolder.commodityIcon);
         return convertView;
     }
@@ -67,5 +69,6 @@ public class HotCategoriesAdapter extends BaseAdapter {
     class ViewHolder {
         public TextView commodityPrice;
         public ImageView commodityIcon;
+        public TextView commodityOldPrice;
     }
 }
